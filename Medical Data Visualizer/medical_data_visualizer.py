@@ -4,13 +4,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # 1
-df = None
+df = pd.read_csv("medical_examination.py")
 
 # 2
-df['overweight'] = None
+df['overweight'] = return 0 if df['weight'] / (df['height']**2) < 25 else 1
 
 # 3
+# For cholesterol
+df.loc[df['cholesterol'] == 1, 'cholesterol'] = 0
+df.loc[df['cholesterol'] > 1, 'cholesterol'] = 1
 
+# For glucose
+df.loc[df['gluc'] == 1, 'gluc'] = 0
+df.loc[df['gluc'] > 1, 'gluc'] = 1
 
 # 4
 def draw_cat_plot():
