@@ -15,10 +15,17 @@ df = df[df["value"].gt(upper) & df["value"].lt(lower)]
 
 def draw_line_plot():
     # Draw line plot
+    figwidth = 16
+    figheight = 9
+    fig, ax = plt.subplots(figsize=(16, 9))
 
+    # Set the title of the chart and also the labels for both axes
+    ax.set_title("Daily freeCodeCamp Forum Page Views 5/2016 - 12/2019")
+    ax.set_xlabel("Date")
+    ax.set_ylabel("Page Views")
 
-
-
+    # Display data in the chart
+    ax.plot(df["date"], df["value"])
 
     # Save image and return fig (don't change this part)
     fig.savefig('line_plot.png')
@@ -54,3 +61,5 @@ def draw_box_plot():
     # Save image and return fig (don't change this part)
     fig.savefig('box_plot.png')
     return fig
+
+print(draw_line_plot())
