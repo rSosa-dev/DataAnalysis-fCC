@@ -25,7 +25,7 @@ def draw_line_plot():
     ax.set_ylabel("Page Views")
 
     # Display data in the chart
-    ax.plot(df["date"], df["value"])
+    ax.plot(df["date"], df["value"], color='red')
 
     # Save image and return fig (don't change this part)
     fig.savefig('line_plot.png')
