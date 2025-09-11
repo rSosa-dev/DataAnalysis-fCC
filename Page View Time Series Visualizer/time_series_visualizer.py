@@ -32,15 +32,31 @@ def draw_line_plot():
     return fig
 
 def draw_bar_plot():
+    # Convert the Date column into DateTime
+    df["date"] = pd.to_datetime(df["date"])
+
+    # Extract year and month
+    df["year"] = df["date"].dt.year
+    df["month"] = df["date"].dt.strftime('%B') # Complete name of the month
+
+    # Create a list to set the order of the months
+    month_order = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    
     # Copy and modify data for monthly bar plot
-    df_bar = None
+    df_bar = df.groupby(["year", "month"])['value'].mean().unstack()
+    df_bar = df_bar[month_order] # Reorder columns by month
 
     # Draw bar plot
+    fig, ax = plt.su
+    bplots(figsize=(12, 6))
+    df_bar.plot.bar(rot=0, ax=ax) # There is no need of putting X and Y axis because we are telling the df to create the plot with its data
 
+    # Set the titles for each axis
+    ax.set_xlabel = ("Years")
+    ax.set_ylabel = ("Average Page Views")
+    ax.legend(title="Months")
 
-
-
-
+    fig.tight_layout()
     # Save image and return fig (don't change this part)
     fig.savefig('bar_plot.png')
     return fig
@@ -62,4 +78,4 @@ def draw_box_plot():
     fig.savefig('box_plot.png')
     return fig
 
-print(draw_line_plot())
+print(draw_bar_plot())
