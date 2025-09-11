@@ -5,10 +5,12 @@ from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
 # Import data (Make sure to parse dates. Consider setting index column to 'date'.)
-df = None
+df = pd.read_csv("fcc-forum-pageviews.csv")
 
 # Clean data
-df = None
+upper = df["value"].quantile(0.025)
+lower = df["value"].quantile(0.975)
+df = df[df["value"].gt(upper) & df["value"].lt(lower)]
 
 
 def draw_line_plot():
